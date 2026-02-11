@@ -1,18 +1,23 @@
+html {
+    scroll-timeline: --page-scroll block;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+@keyframes border-color-change {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
+
 body {
     background-color: #010101;
     color: white;
-    font-family: Arial, sans-serif;
+    font-family: 'Poppins Regular', sans-serif;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
     padding: 0;
 }
 
@@ -24,10 +29,20 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 25px 80px;
-    background-color: rgba(1, 1, 1, 0.95);
+    padding: 24px 80px;
+    background: linear-gradient(to bottom, rgb(1, 1, 1), rgba(1, 1, 1, 0.7));
     backdrop-filter: blur(10px);
     z-index: 1000;
+}
+
+.navbar::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 65px;
+    right: 65px;
+    height: 1px;
+    background-color: #1a1a1a;
 }
 
 .navbar::after {
@@ -37,7 +52,10 @@ body {
     left: 65px;
     right: 65px;
     height: 1px;
-    background-color: #1a1a1a;
+    background-color: white;
+    transform-origin: 0 50%;
+    animation: border-color-change linear;
+    animation-timeline: --page-scroll;
 }
 
 .nav-brand {
@@ -93,7 +111,7 @@ body {
     max-width: 1400px;
     gap: 60px;
     padding: 0px 80px;
-    margin-top: 100px;
+    margin: 150px auto 80px;
 }
 
 .text-content {
@@ -104,17 +122,17 @@ body {
 .header-text {
     font-size: 0.65rem;
     letter-spacing: 3px;
-    font-weight: 600;
-    margin-bottom: 40px;
+    font-weight: 900;
+    margin-bottom: 24px;
     color: #888;
     font-family: Poppins Regular, sans-serif;
 }   
 
 .main-title {
-    font-size: 5.5rem;
+    font-size: 6.5rem;
     font-weight: 800;
     line-height: 0.95;
-    margin-bottom: 40px;
+    margin-bottom: 32px;
     letter-spacing: -1px;
     font-family: 'Google Sans Flex', sans-serif;
 }
@@ -178,7 +196,7 @@ body {
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
+    transform: translateY(-3px);
 }
 
 .btn-secondary {
@@ -229,3 +247,192 @@ body {
     src: url(fonts/google/GoogleSansFlex-VariableFont_GRAD,ROND,opsz,slnt,wdth,wght.ttf) format('truetype');
 }
 
+
+.Brand-Name {
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: 13.5rem;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -1px;
+    line-height: 0.95;
+    text-align: center;
+    margin-bottom: 8px;
+    overflow: hidden;
+}
+
+.Brand-Name .letter {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(120px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.Brand-Name.animate .letter {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.ticker-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background-color: white;
+    padding: 8px 0;
+    margin-bottom: 160px;
+    transform: rotate(-1deg);
+}
+
+.ticker {
+    display: flex;
+    animation: scroll 32s linear infinite;
+    width: fit-content;
+}
+
+.ticker-item {
+    font-family: 'Poppins Regular', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 650;
+    color: black;
+    padding: 0 30px;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+}
+
+.ticker-item::before {
+    content: '✦';
+    margin-right: 16px;
+    font-size: 1.5rem;
+}
+
+@keyframes scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.experience-section {
+    text-align: center;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 80px 80px;
+    margin-bottom: 240px;
+}
+
+.experience-badge {
+    background-color: #DC143C;
+    color: white;
+    font-family: 'Poppins Regular', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    margin-bottom: 50px;
+    letter-spacing: 0.3px;
+}
+
+h2.experience-title {
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: 4.5rem ;
+    font-weight: 800;
+    line-height: 1;
+    color: #4169E1;
+    margin-bottom: 50px;
+}
+
+.experience-description {
+    font-family: 'Poppins Regular', sans-serif;
+    font-size: 1.4rem ;
+    line-height: 1.4 ;
+    font-weight: 700;
+    color: #ffffff;
+    max-width: 1000px;
+    margin: 0 auto 20px;
+    margin-bottom: 24px ;
+}
+
+
+
+.experience-note {
+    font-family: 'Poppins Regular', sans-serif;
+    line-height: 1.4 ;
+    font-style: italic;
+    font-size: 1.4rem ; 
+    font-weight: 500;
+    color: #999;
+    transition: all 0.3s ease;
+}
+
+/* Mastered Section Styles */
+.mastered-section {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 48px;
+    max-width: 1600px;
+    margin: 0 auto 120px;
+    padding: 0 80px;
+}
+.mastered-left {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+}
+.mastered-title {
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: 6.5rem;
+    font-weight: 800;
+    color: #1a1aff;
+    line-height: 1.05;
+    margin: 0;
+    text-align: left;
+}
+.mastered-card {
+    flex: 1;
+    background: #1a1aff;
+    border-radius: 36px;
+    padding: 48px 40px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    min-width: 420px;
+    max-width: 520px;
+    position: relative;
+}
+.mastered-illustration {
+    margin-bottom: 32px;
+}
+.mastered-card-title {
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 32px;
+    line-height: 1.1;
+}
+.mastered-highlight {
+    color: #efef1e;
+}
+.mastered-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+.mastered-tag {
+    background: #111;
+    color: #fff;
+    font-family: 'Poppins Regular', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border-radius: 22px;
+    padding: 8px 22px;
+    margin-bottom: 8px;
+    display: inline-block;
+}
