@@ -1,5 +1,11 @@
 html {
     scroll-timeline: --page-scroll block;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+}
+
+html::-webkit-scrollbar {
+    display: none; /* Chrome, Safari and Opera */
 }
 
 * {
@@ -19,6 +25,7 @@ body {
     font-family: 'Poppins Regular', sans-serif;
     min-height: 100vh;
     padding: 0;
+    overflow-x: hidden; /* Prevent horizontal scroll */
 }
 
 .navbar {
@@ -29,7 +36,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 24px 80px;
+    padding: 18px 80px;
     background: linear-gradient(to bottom, rgb(1, 1, 1), rgba(1, 1, 1, 0.7));
     backdrop-filter: blur(10px);
     z-index: 1000;
@@ -111,12 +118,14 @@ body {
     max-width: 1400px;
     gap: 60px;
     padding: 0px 80px;
-    margin: 150px auto 240px;
+    margin: 130px auto 240px;
+    min-height: 500px; /* Prevents container height from shrinking during typing */
 }
 
 .text-content {
     flex: 1;
     max-width: 700px;
+    min-height: 320px; /* Ensures text area doesn't shrink during typing */
 }
 
 .header-text {
@@ -137,7 +146,7 @@ body {
     font-family: 'Google Sans Flex', sans-serif;
 }
 .main-title span { 
-    color: #efef1e;;
+    color: #efef1e;
 }
 
 .cursor {
@@ -212,7 +221,7 @@ body {
 
 /* Image container with flexible sizing */
 .image-container {
-    width: 380px;
+    width: 400px;
 	aspect-ratio: 3/4;
     overflow: hidden;
     border-radius: 20px;
@@ -225,7 +234,7 @@ body {
     height: 100%;
     object-fit: cover;
     object-position: center;
-    filter: grayscale(100%);
+    /* filter: grayscale(100%); */
 }
 
 
@@ -341,7 +350,7 @@ h2.experience-title {
     font-size: 4.5rem ;
     font-weight: 800;
     line-height: 1;
-    color: #4169E1;
+    color: #1a1aff;
     margin-bottom: 50px;
 }
 
@@ -372,40 +381,103 @@ h2.experience-title {
 .mastered-section {
     display: flex;
     align-items: flex-start;
-    justify-content: center;
-    gap: 48px;
-    max-width: 1600px;
-    margin: 0 auto 120px;
+    justify-content: space-between;
+    gap: 80px; 
+    max-width: 1400px;
+    margin: 0 auto;
     padding: 0 80px;
+    position: relative;
+    height: 350vh;
 }
+
 .mastered-left {
-    flex: 1;
+    position: sticky;
+    top: 100px; /* Offset for navbar */
+    height: calc(100vh - 100px);
+    flex: 1.5; /* Give more space to the title to prevent ugly wrapping */
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-end;
+    align-items: center;
+    justify-content: flex-start;
+    z-index: 2;
 }
+
 .mastered-title {
     font-family: 'Google Sans Flex', sans-serif;
-    font-size: 6.5rem;
+    font-size: 6rem; /* Slightly smaller for better balance */
     font-weight: 800;
-    color: #1a1aff;
-    line-height: 1.05;
+    color: white; /* Changed to white for a cleaner, industry-level look */
+    line-height: 0.95;
+    letter-spacing: -2px; /* Tighter letter spacing for high-end feel */
     margin: 0;
     text-align: left;
+    margin-top: -35vh; /* Start slightly higher for better visual flow */
 }
-.mastered-card {
+
+.mastered-title br {
+    display: block;
+    content: "";
+    margin-top: 10px;
+}
+
+.mastered-cards-container {
+    position: sticky;
+    top: 80px; /* Offset for navbar */
+    height: calc(100vh - 80px);
     flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start; 
+    overflow: hidden; 
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    /* Dynamic fade mask */
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent var(--mask-top, 0%),
+        black var(--mask-top-solid, 10%),
+        black var(--mask-bottom-solid, 90%),
+        transparent var(--mask-bottom, 100%)
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        transparent var(--mask-top, 0%),
+        black var(--mask-top-solid, 10%),
+        black var(--mask-bottom-solid, 90%),
+        transparent var(--mask-bottom, 100%)
+    );
+}
+
+/* New track for the cards to animate vertical scrolling */
+.mastered-cards-track {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    will-change: transform;
+}
+
+.mastered-card {
     background: #1a1aff;
     border-radius: 36px;
     padding: 48px 40px 40px 40px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
-    min-width: 420px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+    width: 100%;
+    min-width: 450px;
     max-width: 520px;
     position: relative;
+    flex-shrink: 0;
+    will-change: transform, opacity;
+    transition: box-shadow 0.3s ease;
 }
+
+.mastered-card:hover {
+    box-shadow: 0 12px 48px rgba(0,0,0,0.35);
+}
+
+
 .mastered-illustration {
     margin-bottom: 32px;
 }
