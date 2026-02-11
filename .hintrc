@@ -7,7 +7,9 @@
       "default",
       {
         "ignore": [
-          "backdrop-filter"
+          "backdrop-filter",
+          "animation-timeline",
+          "scroll-timeline"
         ]
       }
     ]
